@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -53,11 +52,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen relative">
+      {/* Animated Gradient Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" />
+        <div className="absolute inset-0 opacity-60">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" 
+               style={{ animation: 'float 6s ease-in-out infinite' }} />
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" 
+               style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" 
+               style={{ animation: 'float 7s ease-in-out infinite' }} />
+          <div className="absolute bottom-20 right-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" 
+               style={{ animation: 'float 9s ease-in-out infinite reverse' }} />
+        </div>
+      </div>
+
       {/* Navigation Header */}
       <motion.header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrollY > 50 ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+          scrollY > 50 ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -88,7 +102,7 @@ const Index = () => {
       </motion.header>
 
       {/* Hero Section */}
-      <section id="about" className="pt-32 pb-20 px-6">
+      <section id="about" className="pt-32 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="grid lg:grid-cols-2 gap-12 items-center"
@@ -99,7 +113,7 @@ const Index = () => {
             <motion.div variants={fadeInUp} className="space-y-8">
               <div className="space-y-4">
                 <motion.div
-                  className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium"
+                  className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-lg"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -119,14 +133,14 @@ const Index = () => {
               
               <div className="flex flex-wrap gap-4">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg">
                     <Download className="mr-2 h-5 w-5" />
                     Download Resume
                   </Button>
                 </motion.div>
                 
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="lg" className="px-8 py-3">
+                  <Button variant="outline" size="lg" className="px-8 py-3 bg-white/70 backdrop-blur-md shadow-lg border-white/30">
                     <Mail className="mr-2 h-5 w-5" />
                     Get in Touch
                   </Button>
@@ -167,7 +181,7 @@ const Index = () => {
                     ease: "easeInOut" 
                   }}
                 />
-                <Avatar className="w-80 h-80 mx-auto relative z-10 ring-4 ring-white shadow-2xl">
+                <Avatar className="w-80 h-80 mx-auto relative z-10 ring-4 ring-white/50 shadow-2xl">
                   <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
                   <AvatarFallback className="text-6xl bg-gradient-to-br from-blue-600 to-purple-600 text-white">JD</AvatarFallback>
                 </Avatar>
@@ -178,7 +192,7 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white/40 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             className="grid grid-cols-2 lg:grid-cols-4 gap-8"
@@ -196,7 +210,7 @@ const Index = () => {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                className="text-center p-6 bg-white/60 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-white/20"
                 whileHover={{ y: -5 }}
               >
                 <stat.icon className="h-8 w-8 mx-auto mb-4 text-blue-600" />
@@ -209,7 +223,7 @@ const Index = () => {
       </section>
 
       {/* Main Content Tabs */}
-      <section id="experience" className="py-20 px-6">
+      <section id="experience" className="py-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -225,7 +239,7 @@ const Index = () => {
           </motion.div>
 
           <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-            <TabsList className="grid w-full grid-cols-6 mb-12 bg-gray-100 p-2 rounded-xl h-auto">
+            <TabsList className="grid w-full grid-cols-6 mb-12 bg-white/60 backdrop-blur-md p-2 rounded-xl h-auto border border-white/20">
               {[
                 { value: "experience", icon: Briefcase, label: "Experience" },
                 { value: "projects", icon: Code, label: "Projects" },
@@ -558,7 +572,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50">
+      <section id="contact" className="py-20 bg-white/40 backdrop-blur-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -582,7 +596,7 @@ const Index = () => {
                   className="text-center"
                   whileHover={{ y: -5 }}
                 >
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-blue-100/70 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/20">
                     <contact.icon className="h-8 w-8 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">{contact.label}</h3>
@@ -591,7 +605,7 @@ const Index = () => {
               ))}
             </div>
 
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg">
               <Zap className="mr-2 h-5 w-5" />
               Start a Conversation
             </Button>
@@ -600,7 +614,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-white border-t">
+      <footer className="py-12 bg-white/30 backdrop-blur-md border-t border-white/20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-600 mb-4 md:mb-0">
@@ -625,6 +639,14 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-30px) rotate(120deg); }
+          66% { transform: translateY(30px) rotate(240deg); }
+        }
+      `}</style>
     </div>
   );
 };
