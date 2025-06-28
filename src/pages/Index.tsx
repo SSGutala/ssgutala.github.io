@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,7 +18,12 @@ import {
   Phone,
   MapPin,
   ExternalLink,
-  Download
+  Download,
+  ArrowRight,
+  Sparkles,
+  Zap,
+  Globe,
+  Trophy
 } from "lucide-react";
 
 const Index = () => {
@@ -42,7 +46,7 @@ const Index = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100
       }
     }
@@ -53,120 +57,221 @@ const Index = () => {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
+    }
+  };
+
+  const sparkleVariants = {
+    initial: { scale: 0, rotate: 0 },
+    animate: {
+      scale: [0, 1, 0],
+      rotate: [0, 180, 360],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut" as const
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-40 w-80 h-80 bg-pink-500 rounded-full filter blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      {/* Floating Sparkles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-yellow-300"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          variants={sparkleVariants}
+          initial="initial"
+          animate="animate"
+          transition={{ delay: i * 0.5 }}
+        >
+          <Sparkles className="h-4 w-4" />
+        </motion.div>
+      ))}
+
       {/* Hero Section */}
       <motion.section 
-        className="relative py-20 px-4 text-center overflow-hidden"
+        className="relative py-32 px-4 text-center overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
-        
-        <motion.div
-          className="relative z-10 max-w-4xl mx-auto"
-          variants={itemVariants}
-        >
+        <div className="relative z-10 max-w-6xl mx-auto">
           <motion.div
-            className="mb-8"
+            className="mb-12"
             animate={floatingAnimation}
           >
-            <Avatar className="w-32 h-32 mx-auto mb-6 ring-4 ring-blue-500/20">
-              <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
-              <AvatarFallback className="text-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white">JD</AvatarFallback>
-            </Avatar>
+            <div className="relative inline-block">
+              <Avatar className="w-40 h-40 mx-auto mb-8 ring-4 ring-purple-500/30 shadow-2xl">
+                <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
+                <AvatarFallback className="text-3xl bg-gradient-to-br from-purple-600 to-blue-600 text-white">JD</AvatarFallback>
+              </Avatar>
+              <motion.div
+                className="absolute -top-2 -right-2 bg-green-500 rounded-full p-2"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Zap className="h-4 w-4 text-white" />
+              </motion.div>
+            </div>
           </motion.div>
           
-          <motion.h1 
-            className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6"
-            variants={itemVariants}
-          >
-            John Developer
-          </motion.h1>
-          
-          <motion.p 
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
-            Full-Stack Engineer & Tech Innovator
-          </motion.p>
-          
-          <motion.div 
-            className="flex flex-wrap justify-center gap-4 mb-8"
-            variants={itemVariants}
-          >
-            <Button variant="outline" size="lg" className="group">
-              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              john@example.com
-            </Button>
-            <Button variant="outline" size="lg" className="group">
-              <Phone className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              (555) 123-4567
-            </Button>
-            <Button variant="outline" size="lg" className="group">
-              <MapPin className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              San Francisco, CA
-            </Button>
+          <motion.div className="space-y-8" variants={itemVariants}>
+            <div className="space-y-4">
+              <motion.div
+                className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-2 text-purple-300 text-sm font-medium backdrop-blur-sm"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Globe className="h-4 w-4" />
+                Available for opportunities
+              </motion.div>
+              
+              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-6 leading-tight">
+                John Developer
+              </h1>
+              
+              <p className="text-2xl md:text-3xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                Building the future with <span className="text-purple-400 font-semibold">AI</span>, 
+                <span className="text-blue-400 font-semibold"> Cloud</span>, and 
+                <span className="text-pink-400 font-semibold"> Innovation</span>
+              </p>
+            </div>
+            
+            <motion.div 
+              className="flex flex-wrap justify-center gap-6 mb-12"
+              variants={itemVariants}
+            >
+              {[
+                { icon: Mail, text: "john@example.com", color: "text-purple-400" },
+                { icon: Phone, text: "(555) 123-4567", color: "text-blue-400" },
+                { icon: MapPin, text: "San Francisco, CA", color: "text-pink-400" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className="group"
+                >
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 backdrop-blur-sm transition-all duration-300"
+                  >
+                    <item.icon className={`mr-2 h-5 w-5 ${item.color} group-hover:scale-110 transition-transform`} />
+                    {item.text}
+                  </Button>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-wrap justify-center gap-6"
+              variants={itemVariants}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-2xl shadow-purple-500/25"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  Download Resume
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </motion.div>
+              
+              {[
+                { icon: Github, text: "GitHub", href: "#" },
+                { icon: Linkedin, text: "LinkedIn", href: "#" }
+              ].map((social, index) => (
+                <motion.div 
+                  key={index}
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm px-8 py-4 text-lg font-semibold"
+                  >
+                    <social.icon className="mr-2 h-5 w-5" />
+                    {social.text}
+                  </Button>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
-          
-          <motion.div 
-            className="flex justify-center gap-4"
-            variants={itemVariants}
-          >
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              <Download className="mr-2 h-4 w-4" />
-              Download Resume
-            </Button>
-            <Button variant="outline">
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
-            </Button>
-            <Button variant="outline">
-              <Linkedin className="mr-2 h-4 w-4" />
-              LinkedIn
-            </Button>
-          </motion.div>
-        </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Stats Section */}
+      <motion.section 
+        className="py-20 px-4 relative z-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={containerVariants}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: "50+", label: "Projects Built", icon: Code },
+              { number: "5+", label: "Years Experience", icon: Trophy },
+              { number: "10M+", label: "Users Impacted", icon: Globe },
+              { number: "$2M", label: "Funding Raised", icon: Star }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
+                <stat.icon className="h-8 w-8 mx-auto mb-4 text-purple-400" />
+                <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </motion.section>
 
       {/* Main Content */}
       <motion.section 
-        className="max-w-6xl mx-auto px-4 pb-20"
+        className="max-w-7xl mx-auto px-4 pb-32 relative z-10"
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true }}
         variants={containerVariants}
       >
         <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-8 bg-white/50 backdrop-blur-sm">
-            <TabsTrigger value="experience" className="flex items-center gap-2">
-              <Briefcase className="h-4 w-4" />
-              <span className="hidden sm:inline">Experience</span>
-            </TabsTrigger>
-            <TabsTrigger value="projects" className="flex items-center gap-2">
-              <Code className="h-4 w-4" />
-              <span className="hidden sm:inline">Projects</span>
-            </TabsTrigger>
-            <TabsTrigger value="startups" className="flex items-center gap-2">
-              <Star className="h-4 w-4" />
-              <span className="hidden sm:inline">Startups</span>
-            </TabsTrigger>
-            <TabsTrigger value="leadership" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Leadership</span>
-            </TabsTrigger>
-            <TabsTrigger value="skills" className="flex items-center gap-2">
-              <GraduationCap className="h-4 w-4" />
-              <span className="hidden sm:inline">Skills</span>
-            </TabsTrigger>
-            <TabsTrigger value="hobbies" className="flex items-center gap-2">
-              <Heart className="h-4 w-4" />
-              <span className="hidden sm:inline">Hobbies</span>
-            </TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6 mb-12 bg-white/5 backdrop-blur-xl border border-white/10 p-2 rounded-2xl">
+            {[
+              { value: "experience", icon: Briefcase, label: "Experience" },
+              { value: "projects", icon: Code, label: "Projects" },
+              { value: "startups", icon: Star, label: "Startups" },
+              { value: "leadership", icon: User, label: "Leadership" },
+              { value: "skills", icon: GraduationCap, label: "Skills" },
+              { value: "hobbies", icon: Heart, label: "Hobbies" }
+            ].map((tab) => (
+              <TabsTrigger 
+                key={tab.value}
+                value={tab.value} 
+                className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-gray-400 hover:text-white transition-all duration-300 rounded-xl p-4"
+              >
+                <tab.icon className="h-4 w-4" />
+                <span className="hidden sm:inline font-medium">{tab.label}</span>
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           <AnimatePresence mode="wait">
@@ -177,44 +282,68 @@ const Index = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid gap-6"
+                className="grid gap-8"
               >
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:shadow-blue-500/10">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">Senior Software Engineer</CardTitle>
-                        <CardDescription className="text-lg font-medium text-blue-600">Google • 2022 - Present</CardDescription>
-                      </div>
-                      <Badge variant="secondary">Current</Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Led development of scalable microservices handling 10M+ daily requests</li>
-                      <li>• Improved system performance by 40% through optimization initiatives</li>
-                      <li>• Mentored 5 junior engineers and conducted technical interviews</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:shadow-blue-500/10">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">Software Engineer</CardTitle>
-                        <CardDescription className="text-lg font-medium text-blue-600">Microsoft • 2020 - 2022</CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Developed cloud-native applications using Azure services</li>
-                      <li>• Implemented CI/CD pipelines reducing deployment time by 60%</li>
-                      <li>• Collaborated with cross-functional teams on product features</li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                {[
+                  {
+                    title: "Senior Software Engineer",
+                    company: "Google",
+                    period: "2022 - Present",
+                    badge: "Current",
+                    badgeColor: "bg-green-500/20 text-green-400",
+                    points: [
+                      "Led development of scalable microservices handling 10M+ daily requests",
+                      "Improved system performance by 40% through optimization initiatives",
+                      "Mentored 5 junior engineers and conducted technical interviews"
+                    ]
+                  },
+                  {
+                    title: "Software Engineer",
+                    company: "Microsoft",
+                    period: "2020 - 2022",
+                    points: [
+                      "Developed cloud-native applications using Azure services",
+                      "Implemented CI/CD pipelines reducing deployment time by 60%",
+                      "Collaborated with cross-functional teams on product features"
+                    ]
+                  }
+                ].map((job, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Card className="group bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl">
+                      <CardHeader>
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <CardTitle className="text-2xl group-hover:text-purple-400 transition-colors text-white">
+                              {job.title}
+                            </CardTitle>
+                            <CardDescription className="text-xl font-medium text-purple-400 mt-2">
+                              {job.company} • {job.period}
+                            </CardDescription>
+                          </div>
+                          {job.badge && (
+                            <Badge className={`${job.badgeColor} border-0 font-semibold`}>
+                              {job.badge}
+                            </Badge>
+                          )}
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-3 text-gray-300">
+                          {job.points.map((point, pointIndex) => (
+                            <li key={pointIndex} className="flex items-start">
+                              <ArrowRight className="h-4 w-4 text-purple-400 mt-1 mr-3 flex-shrink-0" />
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </motion.div>
             </TabsContent>
 
