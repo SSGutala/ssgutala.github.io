@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,269 +21,236 @@ import {
   ExternalLink,
   Download,
   ArrowRight,
-  Sparkles,
+  Trophy,
+  Users,
   Zap,
-  Globe,
-  Trophy
+  Target
 } from "lucide-react";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("experience");
+  const [scrollY, setScrollY] = useState(0);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: "easeOut" }
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
-  };
-
-  const floatingAnimation = {
-    y: [-10, 10, -10],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut" as const
-    }
-  };
-
-  const sparkleVariants = {
-    initial: { scale: 0, rotate: 0 },
+  const staggerContainer = {
+    initial: {},
     animate: {
-      scale: [0, 1, 0],
-      rotate: [0, 180, 360],
       transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut" as const
+        staggerChildren: 0.1
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-40 w-80 h-80 bg-pink-500 rounded-full filter blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      {/* Floating Sparkles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-yellow-300"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          variants={sparkleVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: i * 0.5 }}
-        >
-          <Sparkles className="h-4 w-4" />
-        </motion.div>
-      ))}
+    <div className="min-h-screen bg-white">
+      {/* Navigation Header */}
+      <motion.header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrollY > 50 ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <motion.div 
+              className="text-2xl font-bold text-gray-900"
+              whileHover={{ scale: 1.05 }}
+            >
+              John Developer
+            </motion.div>
+            <nav className="hidden md:flex space-x-8">
+              {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
+                <motion.a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                  whileHover={{ y: -2 }}
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </motion.header>
 
       {/* Hero Section */}
-      <motion.section 
-        className="relative py-32 px-4 text-center overflow-hidden"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto">
+      <section id="about" className="pt-32 pb-20 px-6">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="mb-12"
-            animate={floatingAnimation}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
           >
-            <div className="relative inline-block">
-              <Avatar className="w-40 h-40 mx-auto mb-8 ring-4 ring-purple-500/30 shadow-2xl">
-                <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
-                <AvatarFallback className="text-3xl bg-gradient-to-br from-purple-600 to-blue-600 text-white">JD</AvatarFallback>
-              </Avatar>
-              <motion.div
-                className="absolute -top-2 -right-2 bg-green-500 rounded-full p-2"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Zap className="h-4 w-4 text-white" />
-              </motion.div>
-            </div>
-          </motion.div>
-          
-          <motion.div className="space-y-8" variants={itemVariants}>
-            <div className="space-y-4">
-              <motion.div
-                className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-2 text-purple-300 text-sm font-medium backdrop-blur-sm"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Globe className="h-4 w-4" />
-                Available for opportunities
-              </motion.div>
-              
-              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-6 leading-tight">
-                John Developer
-              </h1>
-              
-              <p className="text-2xl md:text-3xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
-                Building the future with <span className="text-purple-400 font-semibold">AI</span>, 
-                <span className="text-blue-400 font-semibold"> Cloud</span>, and 
-                <span className="text-pink-400 font-semibold"> Innovation</span>
-              </p>
-            </div>
-            
-            <motion.div 
-              className="flex flex-wrap justify-center gap-6 mb-12"
-              variants={itemVariants}
-            >
-              {[
-                { icon: Mail, text: "john@example.com", color: "text-purple-400" },
-                { icon: Phone, text: "(555) 123-4567", color: "text-blue-400" },
-                { icon: MapPin, text: "San Francisco, CA", color: "text-pink-400" }
-              ].map((item, index) => (
+            <motion.div variants={fadeInUp} className="space-y-8">
+              <div className="space-y-4">
                 <motion.div
-                  key={index}
+                  className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium"
                   whileHover={{ scale: 1.05 }}
-                  className="group"
                 >
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 backdrop-blur-sm transition-all duration-300"
-                  >
-                    <item.icon className={`mr-2 h-5 w-5 ${item.color} group-hover:scale-110 transition-transform`} />
-                    {item.text}
-                  </Button>
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  Available for new opportunities
                 </motion.div>
-              ))}
-            </motion.div>
-            
-            <motion.div 
-              className="flex flex-wrap justify-center gap-6"
-              variants={itemVariants}
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-2xl shadow-purple-500/25"
-                >
-                  <Download className="mr-2 h-5 w-5" />
-                  Download Resume
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </motion.div>
+                
+                <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                  Senior Software
+                  <span className="text-blue-600 block">Engineer</span>
+                </h1>
+                
+                <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                  I build scalable web applications and lead engineering teams at top tech companies. 
+                  Passionate about creating products that impact millions of users.
+                </p>
+              </div>
               
-              {[
-                { icon: Github, text: "GitHub", href: "#" },
-                { icon: Linkedin, text: "LinkedIn", href: "#" }
-              ].map((social, index) => (
-                <motion.div 
-                  key={index}
-                  whileHover={{ scale: 1.05 }} 
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm px-8 py-4 text-lg font-semibold"
-                  >
-                    <social.icon className="mr-2 h-5 w-5" />
-                    {social.text}
+              <div className="flex flex-wrap gap-4">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                    <Download className="mr-2 h-5 w-5" />
+                    Download Resume
                   </Button>
                 </motion.div>
-              ))}
+                
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button variant="outline" size="lg" className="px-8 py-3">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Get in Touch
+                  </Button>
+                </motion.div>
+              </div>
+
+              <div className="flex items-center space-x-6 pt-4">
+                {[
+                  { icon: Github, href: "#", label: "GitHub" },
+                  { icon: Linkedin, href: "#", label: "LinkedIn" }
+                ].map((social) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                  >
+                    <social.icon className="h-6 w-6" />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div 
+              variants={fadeInUp}
+              className="relative"
+            >
+              <div className="relative">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl blur-2xl opacity-20"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 1, 0] 
+                  }}
+                  transition={{ 
+                    duration: 4, 
+                    repeat: Infinity,
+                    ease: "easeInOut" 
+                  }}
+                />
+                <Avatar className="w-80 h-80 mx-auto relative z-10 ring-4 ring-white shadow-2xl">
+                  <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
+                  <AvatarFallback className="text-6xl bg-gradient-to-br from-blue-600 to-purple-600 text-white">JD</AvatarFallback>
+                </Avatar>
+              </div>
             </motion.div>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Stats Section */}
-      <motion.section 
-        className="py-20 px-4 relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
             {[
               { number: "50+", label: "Projects Built", icon: Code },
               { number: "5+", label: "Years Experience", icon: Trophy },
-              { number: "10M+", label: "Users Impacted", icon: Globe },
-              { number: "$2M", label: "Funding Raised", icon: Star }
+              { number: "10M+", label: "Users Impacted", icon: Users },
+              { number: "$2M", label: "Funding Raised", icon: Target }
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="text-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -5 }}
+                variants={fadeInUp}
+                className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                whileHover={{ y: -5 }}
               >
-                <stat.icon className="h-8 w-8 mx-auto mb-4 text-purple-400" />
-                <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
+                <stat.icon className="h-8 w-8 mx-auto mb-4 text-blue-600" />
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-gray-600 text-sm font-medium">{stat.label}</div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Main Content */}
-      <motion.section 
-        className="max-w-7xl mx-auto px-4 pb-32 relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-      >
-        <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-12 bg-white/5 backdrop-blur-xl border border-white/10 p-2 rounded-2xl">
-            {[
-              { value: "experience", icon: Briefcase, label: "Experience" },
-              { value: "projects", icon: Code, label: "Projects" },
-              { value: "startups", icon: Star, label: "Startups" },
-              { value: "leadership", icon: User, label: "Leadership" },
-              { value: "skills", icon: GraduationCap, label: "Skills" },
-              { value: "hobbies", icon: Heart, label: "Hobbies" }
-            ].map((tab) => (
-              <TabsTrigger 
-                key={tab.value}
-                value={tab.value} 
-                className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-gray-400 hover:text-white transition-all duration-300 rounded-xl p-4"
-              >
-                <tab.icon className="h-4 w-4" />
-                <span className="hidden sm:inline font-medium">{tab.label}</span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
+      {/* Main Content Tabs */}
+      <section id="experience" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">My Journey</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Explore my professional experience, projects, and the path that led me here.
+            </p>
+          </motion.div>
 
-          <AnimatePresence mode="wait">
+          <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
+            <TabsList className="grid w-full grid-cols-6 mb-12 bg-gray-100 p-2 rounded-xl h-auto">
+              {[
+                { value: "experience", icon: Briefcase, label: "Experience" },
+                { value: "projects", icon: Code, label: "Projects" },
+                { value: "startups", icon: Star, label: "Startups" },
+                { value: "leadership", icon: User, label: "Leadership" },
+                { value: "skills", icon: GraduationCap, label: "Skills" },
+                { value: "hobbies", icon: Heart, label: "Hobbies" }
+              ].map((tab) => (
+                <TabsTrigger 
+                  key={tab.value}
+                  value={tab.value} 
+                  className="flex flex-col items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-blue-600 text-gray-600 hover:text-gray-900 transition-all duration-300 rounded-lg p-4 h-auto"
+                >
+                  <tab.icon className="h-5 w-5" />
+                  <span className="text-sm font-medium hidden sm:block">{tab.label}</span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
             <TabsContent value="experience" className="mt-0">
               <motion.div
-                key="experience"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid gap-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="space-y-8"
               >
                 {[
                   {
@@ -290,7 +258,8 @@ const Index = () => {
                     company: "Google",
                     period: "2022 - Present",
                     badge: "Current",
-                    badgeColor: "bg-green-500/20 text-green-400",
+                    badgeColor: "bg-green-100 text-green-700",
+                    description: "Leading development of scalable microservices and mentoring junior engineers.",
                     points: [
                       "Led development of scalable microservices handling 10M+ daily requests",
                       "Improved system performance by 40% through optimization initiatives",
@@ -301,6 +270,7 @@ const Index = () => {
                     title: "Software Engineer",
                     company: "Microsoft",
                     period: "2020 - 2022",
+                    description: "Developed cloud-native applications and implemented CI/CD pipelines.",
                     points: [
                       "Developed cloud-native applications using Azure services",
                       "Implemented CI/CD pipelines reducing deployment time by 60%",
@@ -310,32 +280,33 @@ const Index = () => {
                 ].map((job, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Card className="group bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl">
-                      <CardHeader>
+                    <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                      <CardHeader className="pb-4">
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle className="text-2xl group-hover:text-purple-400 transition-colors text-white">
+                            <CardTitle className="text-2xl text-gray-900 mb-2">
                               {job.title}
                             </CardTitle>
-                            <CardDescription className="text-xl font-medium text-purple-400 mt-2">
+                            <CardDescription className="text-lg font-medium text-blue-600">
                               {job.company} • {job.period}
                             </CardDescription>
+                            <p className="text-gray-600 mt-2">{job.description}</p>
                           </div>
                           {job.badge && (
-                            <Badge className={`${job.badgeColor} border-0 font-semibold`}>
+                            <Badge className={`${job.badgeColor} border-0 font-medium`}>
                               {job.badge}
                             </Badge>
                           )}
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-3 text-gray-300">
+                        <ul className="space-y-3 text-gray-700">
                           {job.points.map((point, pointIndex) => (
                             <li key={pointIndex} className="flex items-start">
-                              <ArrowRight className="h-4 w-4 text-purple-400 mt-1 mr-3 flex-shrink-0" />
+                              <ArrowRight className="h-4 w-4 text-blue-600 mt-1 mr-3 flex-shrink-0" />
                               {point}
                             </li>
                           ))}
@@ -349,95 +320,89 @@ const Index = () => {
 
             <TabsContent value="projects" className="mt-0">
               <motion.div
-                key="projects"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="grid md:grid-cols-2 gap-8"
               >
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:shadow-purple-500/10">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-purple-600 transition-colors">
-                      <Code className="h-5 w-5" />
-                      AI-Powered Analytics Platform
-                    </CardTitle>
-                    <CardDescription>Full-stack web application with ML integration</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">
-                      Built a comprehensive analytics platform using React, Node.js, and TensorFlow.
-                      Processes 1M+ data points daily with real-time insights.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <Badge>React</Badge>
-                      <Badge>Node.js</Badge>
-                      <Badge>TensorFlow</Badge>
-                      <Badge>PostgreSQL</Badge>
-                    </div>
-                    <Button variant="outline" size="sm" className="group/btn">
-                      <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                      View Project
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:shadow-green-500/10">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-green-600 transition-colors">
-                      <Code className="h-5 w-5" />
-                      Blockchain Voting System
-                    </CardTitle>
-                    <CardDescription>Secure voting platform using blockchain</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">
-                      Developed a transparent voting system using Ethereum smart contracts.
-                      Ensures immutable vote records and democratic transparency.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <Badge>Solidity</Badge>
-                      <Badge>Web3.js</Badge>
-                      <Badge>React</Badge>
-                      <Badge>Ethereum</Badge>
-                    </div>
-                    <Button variant="outline" size="sm" className="group/btn">
-                      <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                      View Project
-                    </Button>
-                  </CardContent>
-                </Card>
+                {[
+                  {
+                    title: "AI-Powered Analytics Platform",
+                    description: "Full-stack web application with ML integration processing 1M+ data points daily.",
+                    tech: ["React", "Node.js", "TensorFlow", "PostgreSQL"],
+                    color: "blue"
+                  },
+                  {
+                    title: "Blockchain Voting System",
+                    description: "Secure voting platform using Ethereum smart contracts for transparent elections.",
+                    tech: ["Solidity", "Web3.js", "React", "Ethereum"],
+                    color: "green"
+                  }
+                ].map((project, index) => (
+                  <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow group">
+                    <CardHeader>
+                      <CardTitle className={`text-xl group-hover:text-${project.color}-600 transition-colors`}>
+                        <Code className="h-5 w-5 inline mr-2" />
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-base">{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.map(tech => (
+                          <Badge key={tech} variant="secondary" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button variant="outline" size="sm" className="group/btn">
+                        <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        View Project
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
               </motion.div>
             </TabsContent>
 
             <TabsContent value="startups" className="mt-0">
               <motion.div
-                key="startups"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                <Card className="group hover:shadow-lg transition-all duration-300 hover:shadow-amber-500/10">
+                <Card className="border-0 shadow-lg">
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div>
-                        <CardTitle className="text-xl group-hover:text-amber-600 transition-colors">TechFlow Solutions</CardTitle>
-                        <CardDescription className="text-lg font-medium text-amber-600">Co-Founder & CTO • 2021 - 2022</CardDescription>
+                        <CardTitle className="text-2xl text-gray-900">TechFlow Solutions</CardTitle>
+                        <CardDescription className="text-lg font-medium text-blue-600 mt-2">
+                          Co-Founder & CTO • 2021 - 2022
+                        </CardDescription>
                       </div>
-                      <Badge variant="outline" className="bg-amber-50">$2M Raised</Badge>
+                      <Badge className="bg-amber-100 text-amber-700 border-0 font-medium">
+                        $2M Raised
+                      </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-700 mb-6 text-lg">
                       Co-founded a B2B SaaS platform automating workflow management for enterprises.
                       Successfully raised Series A funding and scaled to 50+ enterprise clients.
                     </p>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Built MVP from scratch, achieving product-market fit in 8 months</li>
-                      <li>• Led technical team of 8 engineers across full-stack development</li>
-                      <li>• Implemented scalable architecture supporting 10K+ concurrent users</li>
+                    <ul className="space-y-3 text-gray-700">
+                      <li className="flex items-start">
+                        <ArrowRight className="h-4 w-4 text-blue-600 mt-1 mr-3 flex-shrink-0" />
+                        Built MVP from scratch, achieving product-market fit in 8 months
+                      </li>
+                      <li className="flex items-start">
+                        <ArrowRight className="h-4 w-4 text-blue-600 mt-1 mr-3 flex-shrink-0" />
+                        Led technical team of 8 engineers across full-stack development
+                      </li>
+                      <li className="flex items-start">
+                        <ArrowRight className="h-4 w-4 text-blue-600 mt-1 mr-3 flex-shrink-0" />
+                        Implemented scalable architecture supporting 10K+ concurrent users
+                      </li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -446,89 +411,96 @@ const Index = () => {
 
             <TabsContent value="leadership" className="mt-0">
               <motion.div
-                key="leadership"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="grid md:grid-cols-2 gap-8"
               >
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="group-hover:text-blue-600 transition-colors">Tech Team Lead</CardTitle>
-                    <CardDescription>Google Developer Student Club</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Led 20+ developers in building community projects</li>
-                      <li>• Organized hackathons with 500+ participants</li>
-                      <li>• Conducted weekly workshops on modern technologies</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="group-hover:text-purple-600 transition-colors">Volunteer Coordinator</CardTitle>
-                    <CardDescription>Code for Good Initiative</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Coordinated 50+ volunteers for nonprofit tech projects</li>
-                      <li>• Delivered 10+ pro-bono applications for local charities</li>
-                      <li>• Mentored junior developers in collaborative coding</li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                {[
+                  {
+                    title: "Tech Team Lead",
+                    org: "Google Developer Student Club",
+                    achievements: [
+                      "Led 20+ developers in building community projects",
+                      "Organized hackathons with 500+ participants",
+                      "Conducted weekly workshops on modern technologies"
+                    ]
+                  },
+                  {
+                    title: "Volunteer Coordinator",
+                    org: "Code for Good Initiative",
+                    achievements: [
+                      "Coordinated 50+ volunteers for nonprofit tech projects",
+                      "Delivered 10+ pro-bono applications for local charities",
+                      "Mentored junior developers in collaborative coding"
+                    ]
+                  }
+                ].map((role, index) => (
+                  <Card key={index} className="border-0 shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-gray-900">{role.title}</CardTitle>
+                      <CardDescription className="text-base font-medium text-blue-600">
+                        {role.org}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2 text-gray-700">
+                        {role.achievements.map((achievement, i) => (
+                          <li key={i} className="flex items-start">
+                            <ArrowRight className="h-4 w-4 text-blue-600 mt-1 mr-3 flex-shrink-0" />
+                            {achievement}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                ))}
               </motion.div>
             </TabsContent>
 
             <TabsContent value="skills" className="mt-0">
               <motion.div
-                key="skills"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                <Card>
+                <Card className="border-0 shadow-lg">
                   <CardHeader>
-                    <CardTitle className="text-blue-600">Technical Skills</CardTitle>
+                    <CardTitle className="text-2xl text-gray-900">Technical Expertise</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold mb-3">Programming Languages</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {["JavaScript", "TypeScript", "Python", "Java", "Go", "Rust"].map(skill => (
-                          <Badge key={skill} variant="secondary" className="hover:bg-blue-100 transition-colors">
-                            {skill}
-                          </Badge>
-                        ))}
+                  <CardContent className="space-y-8">
+                    {[
+                      {
+                        category: "Programming Languages",
+                        skills: ["JavaScript", "TypeScript", "Python", "Java", "Go", "Rust"],
+                        color: "blue"
+                      },
+                      {
+                        category: "Frameworks & Libraries",
+                        skills: ["React", "Next.js", "Node.js", "Express", "Django", "Spring Boot"],
+                        color: "green"
+                      },
+                      {
+                        category: "Cloud & Infrastructure",
+                        skills: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Terraform"],
+                        color: "purple"
+                      }
+                    ].map((group, index) => (
+                      <div key={index}>
+                        <h4 className="font-semibold text-gray-900 mb-4 text-lg">{group.category}</h4>
+                        <div className="flex flex-wrap gap-3">
+                          {group.skills.map(skill => (
+                            <Badge 
+                              key={skill} 
+                              variant="secondary" 
+                              className={`hover:bg-${group.color}-100 hover:text-${group.color}-700 transition-colors px-3 py-1`}
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-3">Frameworks & Libraries</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {["React", "Next.js", "Node.js", "Express", "Django", "Spring Boot"].map(skill => (
-                          <Badge key={skill} variant="secondary" className="hover:bg-green-100 transition-colors">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-3">Cloud & Infrastructure</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Terraform"].map(skill => (
-                          <Badge key={skill} variant="secondary" className="hover:bg-purple-100 transition-colors">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </CardContent>
                 </Card>
               </motion.div>
@@ -536,77 +508,123 @@ const Index = () => {
 
             <TabsContent value="hobbies" className="mt-0">
               <motion.div
-                key="hobbies"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="grid md:grid-cols-2 gap-8"
               >
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-red-600 transition-colors">
-                      <Heart className="h-5 w-5" />
-                      Photography
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">
-                      Passionate about landscape and street photography. 
-                      Featured in local exhibitions and online galleries.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-green-600 transition-colors">
-                      <Star className="h-5 w-5" />
-                      Rock Climbing
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">
-                      Active rock climber with 5+ years experience. 
-                      Enjoy both indoor bouldering and outdoor sport climbing.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-blue-600 transition-colors">
-                      <Code className="h-5 w-5" />
-                      Open Source
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">
-                      Active contributor to open source projects. 
-                      Maintainer of several popular developer tools.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="group hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 group-hover:text-purple-600 transition-colors">
-                      <GraduationCap className="h-5 w-5" />
-                      Teaching
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">
-                      Volunteer coding instructor for underrepresented communities. 
-                      Taught 100+ students programming fundamentals.
-                    </p>
-                  </CardContent>
-                </Card>
+                {[
+                  {
+                    title: "Photography",
+                    icon: Heart,
+                    description: "Passionate about landscape and street photography. Featured in local exhibitions and online galleries.",
+                    color: "text-red-600"
+                  },
+                  {
+                    title: "Rock Climbing",
+                    icon: Star,
+                    description: "Active rock climber with 5+ years experience. Enjoy both indoor bouldering and outdoor sport climbing.",
+                    color: "text-green-600"
+                  },
+                  {
+                    title: "Open Source",
+                    icon: Code,
+                    description: "Active contributor to open source projects. Maintainer of several popular developer tools.",
+                    color: "text-blue-600"
+                  },
+                  {
+                    title: "Teaching",
+                    icon: GraduationCap,
+                    description: "Volunteer coding instructor for underrepresented communities. Taught 100+ students programming fundamentals.",
+                    color: "text-purple-600"
+                  }
+                ].map((hobby, index) => (
+                  <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                    <CardHeader>
+                      <CardTitle className={`flex items-center gap-3 text-xl ${hobby.color}`}>
+                        <hobby.icon className="h-6 w-6" />
+                        {hobby.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 leading-relaxed">{hobby.description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
               </motion.div>
             </TabsContent>
-          </AnimatePresence>
-        </Tabs>
-      </motion.section>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Let's Work Together</h2>
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+              I'm always interested in hearing about new opportunities and connecting with fellow developers.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              {[
+                { icon: Mail, text: "john@example.com", label: "Email" },
+                { icon: Phone, text: "(555) 123-4567", label: "Phone" },
+                { icon: MapPin, text: "San Francisco, CA", label: "Location" }
+              ].map((contact, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <contact.icon className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">{contact.label}</h3>
+                  <p className="text-gray-600">{contact.text}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+              <Zap className="mr-2 h-5 w-5" />
+              Start a Conversation
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-white border-t">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-gray-600 mb-4 md:mb-0">
+              © 2024 John Developer. All rights reserved.
+            </div>
+            <div className="flex space-x-6">
+              {[
+                { icon: Github, href: "#", label: "GitHub" },
+                { icon: Linkedin, href: "#", label: "LinkedIn" },
+                { icon: Mail, href: "#", label: "Email" }
+              ].map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  className="text-gray-600 hover:text-blue-600 transition-colors"
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <social.icon className="h-5 w-5" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
