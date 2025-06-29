@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -28,24 +29,6 @@ import {
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("experience");
-  const [backgroundIndex, setBackgroundIndex] = useState(0);
-
-  const gradients = [
-    "from-slate-900 via-blue-900 to-black", // blue-black
-    "from-slate-900 via-green-900 to-black", // green-black
-    "from-slate-900 via-red-900 to-black", // red-black
-    "from-slate-900 via-purple-900 to-black", // purple-black
-    "from-slate-900 via-orange-900 to-black", // orange-black
-    "from-slate-900 via-pink-900 to-black", // pink-black
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBackgroundIndex((prevIndex) => (prevIndex + 1) % gradients.length);
-    }, 8000); // Increased from 5000ms to 8000ms for slower transitions
-
-    return () => clearInterval(interval);
-  }, [gradients.length]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -93,7 +76,46 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${gradients[backgroundIndex]} relative overflow-hidden transition-all duration-[8000ms] ease-[cubic-bezier(0.4,0,0.2,1)]`}>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background with CSS Keyframes */}
+      <div 
+        className="absolute inset-0 animate-gradient-cycle"
+        style={{
+          background: 'linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to))',
+          animation: 'gradientCycle 48s ease-in-out infinite'
+        }}
+      />
+      
+      <style jsx>{`
+        @keyframes gradientCycle {
+          0% {
+            background: linear-gradient(to bottom right, #0f172a, #1e3a8a, #000000);
+          }
+          16.66% {
+            background: linear-gradient(to bottom right, #0f172a, #166534, #000000);
+          }
+          33.33% {
+            background: linear-gradient(to bottom right, #0f172a, #991b1b, #000000);
+          }
+          50% {
+            background: linear-gradient(to bottom right, #0f172a, #581c87, #000000);
+          }
+          66.66% {
+            background: linear-gradient(to bottom right, #0f172a, #9a3412, #000000);
+          }
+          83.33% {
+            background: linear-gradient(to bottom right, #0f172a, #be185d, #000000);
+          }
+          100% {
+            background: linear-gradient(to bottom right, #0f172a, #1e3a8a, #000000);
+          }
+        }
+        
+        .animate-gradient-cycle {
+          animation: gradientCycle 48s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
@@ -227,7 +249,7 @@ const Index = () => {
                   </Button>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.section>
