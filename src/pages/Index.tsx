@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +28,24 @@ import {
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("experience");
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+
+  const gradients = [
+    "from-slate-900 via-blue-900 to-black", // blue-black
+    "from-slate-900 via-green-900 to-black", // green-black
+    "from-slate-900 via-red-900 to-black", // red-black
+    "from-slate-900 via-purple-900 to-black", // purple-black
+    "from-slate-900 via-orange-900 to-black", // orange-black
+    "from-slate-900 via-pink-900 to-black", // pink-black
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBackgroundIndex((prevIndex) => (prevIndex + 1) % gradients.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [gradients.length]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -76,7 +93,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-black relative overflow-hidden">
+    <div className={`min-h-screen bg-gradient-to-br ${gradients[backgroundIndex]} relative overflow-hidden transition-all duration-[2000ms] ease-in-out`}>
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
