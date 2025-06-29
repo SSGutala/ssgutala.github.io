@@ -42,7 +42,7 @@ const Index = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setBackgroundIndex((prevIndex) => (prevIndex + 1) % gradients.length);
-    }, 5000);
+    }, 8000); // Increased from 5000ms to 8000ms for slower transitions
 
     return () => clearInterval(interval);
   }, [gradients.length]);
@@ -93,7 +93,7 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${gradients[backgroundIndex]} relative overflow-hidden transition-all duration-[2000ms] ease-in-out`}>
+    <div className={`min-h-screen bg-gradient-to-br ${gradients[backgroundIndex]} relative overflow-hidden transition-all duration-[8000ms] ease-[cubic-bezier(0.4,0,0.2,1)]`}>
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
