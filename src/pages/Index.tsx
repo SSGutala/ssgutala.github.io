@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -281,7 +280,7 @@ const Index = () => {
         </div>
       </motion.section>
 
-      {/* Main Content */}
+      {/* Main Content with Fixed Navigation */}
       <motion.section 
         className="max-w-7xl mx-auto px-4 pb-32 relative z-10"
         initial="hidden"
@@ -290,22 +289,23 @@ const Index = () => {
         variants={containerVariants}
       >
         <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-12 bg-white/5 backdrop-blur-xl border border-white/10 p-2 rounded-2xl">
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 mb-12 bg-white/5 backdrop-blur-xl border border-white/10 p-2 rounded-2xl gap-1">
             {[
-              { value: "experience", icon: Briefcase, label: "Experience" },
-              { value: "projects", icon: Code, label: "Projects" },
-              { value: "startups", icon: Star, label: "Startups" },
-              { value: "leadership", icon: User, label: "Leadership" },
-              { value: "skills", icon: GraduationCap, label: "Education & Skills" },
-              { value: "hobbies", icon: Heart, label: "Interests" }
+              { value: "experience", icon: Briefcase, label: "Experience", shortLabel: "Exp" },
+              { value: "projects", icon: Code, label: "Projects", shortLabel: "Projects" },
+              { value: "startups", icon: Star, label: "Startups", shortLabel: "Startups" },
+              { value: "leadership", icon: User, label: "Leadership", shortLabel: "Leader" },
+              { value: "skills", icon: GraduationCap, label: "Education & Skills", shortLabel: "Skills" },
+              { value: "hobbies", icon: Heart, label: "Interests", shortLabel: "Interests" }
             ].map((tab) => (
               <TabsTrigger 
                 key={tab.value}
                 value={tab.value} 
-                className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-gray-400 hover:text-white transition-all duration-300 rounded-xl p-4"
+                className="flex items-center justify-center gap-1.5 data-[state=active]:bg-white/20 data-[state=active]:text-white text-gray-400 hover:text-white transition-all duration-300 rounded-xl p-3 text-xs sm:text-sm min-h-[48px]"
               >
-                <tab.icon className="h-4 w-4" />
+                <tab.icon className="h-4 w-4 flex-shrink-0" />
                 <span className="hidden sm:inline font-medium">{tab.label}</span>
+                <span className="sm:hidden font-medium">{tab.shortLabel}</span>
               </TabsTrigger>
             ))}
           </TabsList>
