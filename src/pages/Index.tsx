@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,7 +24,8 @@ import {
   Sparkles,
   Zap,
   Globe,
-  Trophy
+  Trophy,
+  Palette
 } from "lucide-react";
 
 const Index = () => {
@@ -227,7 +229,8 @@ const Index = () => {
               
               {[
                 { icon: Github, text: "GitHub", href: "#" },
-                { icon: Linkedin, text: "LinkedIn", href: "#" }
+                { icon: Linkedin, text: "LinkedIn", href: "#" },
+                { icon: Palette, text: "Design Portfolio", href: "https://docs.google.com/presentation/d/1VGbGdxLiW0tQ9H5B5C9k7PW1EGFEiP5O4BXHQW8kL2A/edit?usp=sharing" }
               ].map((social, index) => (
                 <motion.div 
                   key={index}
@@ -238,6 +241,7 @@ const Index = () => {
                     variant="outline" 
                     size="lg"
                     className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm px-8 py-4 text-lg font-semibold"
+                    onClick={() => window.open(social.href, '_blank')}
                   >
                     <social.icon className="mr-2 h-5 w-5" />
                     {social.text}
