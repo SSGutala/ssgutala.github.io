@@ -24,66 +24,73 @@ import {
 const FEATURED_PHOTOS = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=1200&h=800&fit=crop",
-    title: "Professional Lifestyle Portrait",
+    src: "/lovable-uploads/9e06ff14-cdf2-4bfa-98fd-a300989f46b6.png",
+    title: "Vintage Style Portrait",
     category: "Portrait",
     location: "Studio Session"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop",
-    title: "Executive Headshot",
-    category: "Headshots",
-    location: "Corporate Session"
+    src: "/lovable-uploads/a75f559b-4d03-464b-9b34-7fa47c541ff7.png",
+    title: "Glamour Portrait",
+    category: "Portrait",
+    location: "Studio Session"
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&h=800&fit=crop",
-    title: "Corporate Event Coverage",
-    category: "Events",
-    location: "Business Conference"
+    src: "/lovable-uploads/595f9829-6395-46d7-b9dd-bbafe3a3a351.png",
+    title: "Professional Headshot",
+    category: "Headshots",
+    location: "Urban Session"
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&h=800&fit=crop&crop=face",
-    title: "Creative Portrait Session",
+    src: "/lovable-uploads/6b8a7540-13ad-4b5a-9b5a-f6f028faaf97.png",
+    title: "Classic Portrait Session",
+    category: "Portrait",
+    location: "Studio Session"
+  },
+  {
+    id: 5,
+    src: "/lovable-uploads/d5964a52-9fce-47cc-962a-3bd6e3cab96b.png",
+    title: "Dance Portrait",
+    category: "Portrait",
+    location: "Studio Session"
+  },
+  {
+    id: 6,
+    src: "/lovable-uploads/ccbd82d1-cce1-4539-8a38-213f5a72de9c.png",
+    title: "Retro Style Portrait",
+    category: "Portrait",
+    location: "Studio Session"
+  },
+  {
+    id: 7,
+    src: "/lovable-uploads/963eefb6-7814-4165-b055-97632832f1e5.png",
+    title: "Event Portrait",
+    category: "Events",
+    location: "Outdoor Event"
+  },
+  {
+    id: 8,
+    src: "/lovable-uploads/e70562ca-a2fc-4b13-b946-599a10fe2228.png",
+    title: "Natural Light Portrait",
     category: "Portrait",
     location: "Natural Light"
   },
   {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&h=800&fit=crop&crop=face",
-    title: "Business Professional",
-    category: "Headshots",
-    location: "Corporate Studio"
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=1200&h=800&fit=crop",
-    title: "Wedding Celebration",
+    id: 9,
+    src: "/lovable-uploads/2ecc591d-ae38-4887-b223-0d11a171e65c.png",
+    title: "Action Portrait",
     category: "Events",
-    location: "Reception Hall"
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop&crop=face",
-    title: "Senior Portrait",
-    category: "Portrait",
     location: "Outdoor Session"
   },
   {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=800&fit=crop&crop=face",
-    title: "LinkedIn Profile Photo",
+    id: 10,
+    src: "/lovable-uploads/ad3d70d4-ee52-458a-8743-6c238ba4b6d3.png",
+    title: "Professional Headshot",
     category: "Headshots",
-    location: "Professional Studio"
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop",
-    title: "Birthday Party",
-    category: "Events",
-    location: "Private Venue"
+    location: "Studio Session"
   }
 ];
 
@@ -323,7 +330,7 @@ const Index = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop&crop=face"
+                src="/lovable-uploads/a75f559b-4d03-464b-9b34-7fa47c541ff7.png"
                 alt="The Photographer"
                 className="w-full rounded-lg shadow-2xl"
               />
