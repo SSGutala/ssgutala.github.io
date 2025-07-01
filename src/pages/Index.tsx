@@ -124,8 +124,8 @@ const Index = () => {
               className="flex items-center space-x-2"
             >
               <Camera className="h-8 w-8 text-white" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                The LinguaFranca
+              <span className="text-2xl font-bold font-dancing bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                The Lingua Franca
               </span>
             </motion.div>
             
@@ -162,9 +162,9 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              Professional Portrait
+              Portrait, Headshot,
               <br />
-              Photography
+              Event Photography
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Capturing authentic moments through portraits, headshots, and events that tell your unique story
@@ -175,9 +175,8 @@ const Index = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-                variant="outline" 
                 size="lg" 
-                className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg font-semibold"
+                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black hover:from-yellow-300 hover:to-orange-400 px-8 py-4 text-lg font-bold shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-yellow-300"
               >
                 Book Session
               </Button>
@@ -407,7 +406,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {[
               { icon: Mail, label: "Email", value: "hello@thelinguafranca.com" },
-              { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
+              { icon: Phone, label: "Phone", value: "+1 (732) 207-0397" },
               { icon: Instagram, label: "Instagram", value: "@thelinguafranca" }
             ].map((contact, index) => (
               <div key={index} className="text-center">
@@ -431,10 +430,10 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <Camera className="h-6 w-6 text-white" />
-              <span className="text-lg font-bold text-white">The LinguaFranca</span>
+              <span className="text-lg font-bold font-dancing text-white">The Lingua Franca</span>
             </div>
             <div className="text-gray-400 text-sm">
-              © 2024 The LinguaFranca. All rights reserved.
+              © 2024 The Lingua Franca. All rights reserved.
             </div>
           </div>
         </div>
