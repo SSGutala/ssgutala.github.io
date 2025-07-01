@@ -24,70 +24,70 @@ import {
 const FEATURED_PHOTOS = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1200&h=800&fit=crop",
-    title: "Mountain Wilderness",
-    category: "Nature",
-    location: "Rocky Mountains"
+    src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=1200&h=800&fit=crop",
+    title: "Professional Lifestyle Portrait",
+    category: "Portrait",
+    location: "Studio Session"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1200&h=800&fit=crop",
-    title: "Golden Hour Blooms",
-    category: "Nature",
-    location: "California"
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop",
+    title: "Executive Headshot",
+    category: "Headshots",
+    location: "Corporate Session"
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=1200&h=800&fit=crop",
-    title: "River Valley",
-    category: "Landscape",
-    location: "Colorado"
+    src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&h=800&fit=crop",
+    title: "Corporate Event Coverage",
+    category: "Events",
+    location: "Business Conference"
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=1200&h=800&fit=crop",
-    title: "Forest Canopy",
-    category: "Nature",
-    location: "Pacific Northwest"
+    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&h=800&fit=crop&crop=face",
+    title: "Creative Portrait Session",
+    category: "Portrait",
+    location: "Natural Light"
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&h=800&fit=crop",
-    title: "Towering Pines",
-    category: "Nature",
-    location: "Oregon"
+    src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&h=800&fit=crop&crop=face",
+    title: "Business Professional",
+    category: "Headshots",
+    location: "Corporate Studio"
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=800&fit=crop",
-    title: "Alpine Sunrise",
-    category: "Landscape",
-    location: "Switzerland"
+    src: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=1200&h=800&fit=crop",
+    title: "Wedding Celebration",
+    category: "Events",
+    location: "Reception Hall"
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=800&fit=crop",
-    title: "Misty Peaks",
-    category: "Landscape",
-    location: "Norwegian Fjords"
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop&crop=face",
+    title: "Senior Portrait",
+    category: "Portrait",
+    location: "Outdoor Session"
   },
   {
     id: 8,
-    src: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200&h=800&fit=crop",
-    title: "Ocean Waves",
-    category: "Seascape",
-    location: "Hawaii"
+    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=800&fit=crop&crop=face",
+    title: "LinkedIn Profile Photo",
+    category: "Headshots",
+    location: "Professional Studio"
   },
   {
     id: 9,
-    src: "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=1200&h=800&fit=crop",
-    title: "Mountain Range",
-    category: "Landscape",
-    location: "Alps"
+    src: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop",
+    title: "Birthday Party",
+    category: "Events",
+    location: "Private Venue"
   }
 ];
 
-const CATEGORIES = ["All", "Nature", "Landscape", "Seascape"];
+const CATEGORIES = ["All", "Portrait", "Headshots", "Events"];
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -156,12 +156,12 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              Capturing Life's
+              Professional Portrait
               <br />
-              Beautiful Moments
+              Photography
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Professional photography that tells your story through the lens of artistry and emotion
+              Capturing authentic moments through portraits, headshots, and events that tell your unique story
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-8 py-4 text-lg font-semibold">
@@ -207,7 +207,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "500+", label: "Projects Completed", icon: Camera },
+              { number: "500+", label: "Portrait Sessions", icon: Camera },
               { number: "50+", label: "Awards Won", icon: Award },
               { number: "1000+", label: "Happy Clients", icon: Users },
               { number: "5+", label: "Years Experience", icon: Star }
@@ -234,7 +234,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Featured Gallery</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              A curated collection of my finest work across different photography genres
+              A curated collection of portraits, headshots, and event photography
             </p>
           </div>
 
@@ -305,20 +305,20 @@ const Index = () => {
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                 Welcome to The LinguaFranca, where every photograph tells a story that transcends 
                 language barriers. With over 5 years of professional experience, I specialize in 
-                capturing the raw beauty of nature and the authentic emotions of life's most 
-                precious moments.
+                portrait photography, professional headshots, and event coverage that captures 
+                authentic emotions and genuine moments.
               </p>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                 My approach combines technical excellence with artistic vision, creating images 
                 that not only document reality but transform it into something extraordinary. 
-                From breathtaking landscapes to intimate portraits, each shot is crafted with 
-                passion and precision.
+                From intimate portraits to corporate headshots and memorable events, each shot 
+                is crafted with passion and precision.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Badge className="bg-white/10 text-white px-4 py-2">Landscape Photography</Badge>
-                <Badge className="bg-white/10 text-white px-4 py-2">Portrait Sessions</Badge>
+                <Badge className="bg-white/10 text-white px-4 py-2">Portrait Photography</Badge>
+                <Badge className="bg-white/10 text-white px-4 py-2">Professional Headshots</Badge>
                 <Badge className="bg-white/10 text-white px-4 py-2">Event Coverage</Badge>
-                <Badge className="bg-white/10 text-white px-4 py-2">Commercial Work</Badge>
+                <Badge className="bg-white/10 text-white px-4 py-2">Corporate Sessions</Badge>
               </div>
             </div>
             <div className="relative">
@@ -329,7 +329,7 @@ const Index = () => {
               />
               <div className="absolute -bottom-6 -right-6 bg-white text-black p-6 rounded-lg shadow-xl">
                 <div className="text-3xl font-bold">500+</div>
-                <div className="text-sm">Projects Completed</div>
+                <div className="text-sm">Sessions Completed</div>
               </div>
             </div>
           </div>
@@ -349,22 +349,22 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Portrait Photography",
-                description: "Professional headshots, family portraits, and personal branding sessions",
-                price: "Starting at $200",
-                features: ["1-2 hour session", "20+ edited photos", "Online gallery", "Print release"]
+                title: "📸 Portrait Photography",
+                description: "Creative portrait sessions that capture your personality and style",
+                price: "$200–$450 / session",
+                features: ["1-2 hour session", "10-20 edited images", "Online gallery", "Print release"]
               },
               {
-                title: "Event Photography",
-                description: "Weddings, corporate events, and special occasions captured beautifully",
-                price: "Starting at $800",
-                features: ["Full day coverage", "200+ edited photos", "Online gallery", "USB delivery"]
+                title: "💼 Professional Headshots",
+                description: "Executive headshots perfect for LinkedIn, corporate websites, and business cards",
+                price: "$200–$450 / person",
+                features: ["1-2 retouched shots", "Multiple crop options", "Quick turnaround", "High-res files"]
               },
               {
-                title: "Commercial Work",
-                description: "Product photography, brand content, and marketing materials",
-                price: "Starting at $500",
-                features: ["Custom packages", "Commercial license", "Rush delivery", "Retouching included"]
+                title: "🎉 Event Photography",
+                description: "Complete event coverage for weddings, parties, and corporate gatherings",
+                price: "$250–$500 / hour",
+                features: ["2-hour minimum", "Edited image delivery", "Online gallery", "USB delivery option"]
               }
             ].map((service, index) => (
               <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300">
