@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -24,8 +23,8 @@ import {
 const FEATURED_PHOTOS = [
   {
     id: 1,
-    src: "/lovable-uploads/9e06ff14-cdf2-4bfa-98fd-a300989f46b6.png",
-    title: "Vintage Style Portrait",
+    src: "/lovable-uploads/6de99abf-cdc0-47a9-ba08-b4fd72577fb1.png",
+    title: "Glamour Portrait",
     category: "Portrait",
     location: "Studio Session"
   },
