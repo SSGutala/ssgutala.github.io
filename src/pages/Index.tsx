@@ -327,63 +327,47 @@ const Index = () => {
                   {
                     title: "AI Engineer Intern",
                     company: "FluidTouch",
-                    period: "Present",
+                    period: "Mar. 2025 - Present",
                     badge: "Current",
                     badgeColor: "bg-green-500/20 text-green-400",
-                    location: "Remote - Hyderabad, India",
+                    location: "Hyderabad, India (Remote)",
                     points: [
-                      "Building machine learning and deep learning models for image classification and natural language processing",
-                      "Developing Generative AI solutions using large language models (LLMs) via Hugging Face and modern NLP frameworks"
+                      "Cutting API use for 10M+ users by building an offline AI tool for text prediction and summarization",
+                      "Saving 240M+ note-taking hrs/yr, based on 50% adoption and 48 hrs/yr saved per user",
+                      "Reducing ₹52 lakhs in development costs and 2K+ engineering hours with a lightweight, local prototype"
                     ]
                   },
                   {
-                    title: "Technical Product Manager & UX Designer",
+                    title: "Technical Product Manager",
                     company: "AT&T",
-                    period: "06/23 - 11/24",
+                    period: "Jun. 2023 - Nov. 2024",
                     location: "Dallas, TX",
                     points: [
-                      "Engineered automated cybersecurity intake system, reducing manual processing time by 80% and surfacing vulnerabilities 3x faster",
-                      "Delivered ~$200K in annual savings by streamlining compliance workflows across engineering teams",
-                      "Spearheaded automation of NDR asset request process, improving operational response time by 50%",
-                      "Analyzed asset usage across 5 US regions, achieving $10K direct savings and avoiding $170K projected fleet overspend"
-                    ]
-                  },
-                  {
-                    title: "UX Researcher",
-                    company: "AT&T - UI/UX Research & Prototyping Initiative",
-                    period: "09/23 - 12/23",
-                    points: [
-                      "Conducted 10+ stakeholder interviews and mapped 15+ pain points into 20+ iterative prototypes (web/mobile)",
-                      "Cut prototyping time by 40% and boosted user satisfaction by 70% through targeted interface redesigns"
-                    ]
-                  },
-                  {
-                    title: "Front-End Developer",
-                    company: "AT&T - Internal Portal Revamp",
-                    period: "06/23 - 09/23",
-                    points: [
-                      "Rebuilt legacy engineering portal used by 10K+ Network Engineering employees using Angular",
-                      "Reduced load times by 15% and improved engagement by 40% via better navigation and refreshed architecture"
+                      "Saved $200K/year and surfaced vulnerabilities 3× faster by conducting research and managing features autonomously, becoming a product matter expert behind a cybersecurity intake system",
+                      "Eliminated 4.9K+ workforce hours annually by replacing manual asset request processes with an automated internal tool—serving as product owner and translating business needs into user-centric solutions",
+                      "Designed 20+ iterative features as a result of 10+ user interviews to deliver on customer and business needs",
+                      "Enhanced load performance for 10K+ users by rebuilding a portal with Angular and improving interaction"
                     ]
                   },
                   {
                     title: "Product Manager Intern",
                     company: "Alarm.com",
-                    period: "05/21 - 08/21",
+                    period: "May 2021 - Aug. 2021",
                     location: "McLean, VA",
                     points: [
-                      "Drafted detailed Product Requirement Document with budget and constraint analysis, addressing B2B hardware UI/UX gaps",
-                      "Coordinated with engineers to develop low-latency hardware architecture with 1Mbps network protocol speeds and <15ms latency"
+                      "Targeted a $581M market by drafting product requirements, managing B2B gaps, risks, and budget constraints",
+                      "Enabled 1 Mbps speed and 10–15 ms latency by collaborating with engineers on efficient hardware design",
+                      "Accelerated timelines by 20% by developing product roadmaps, use-cases, user stories— driving delivery of business value and aligning results with key stakeholders"
                     ]
                   },
                   {
                     title: "Software Developer Intern",
                     company: "PEMDAS Technologies",
-                    period: "05/19 - 08/19",
+                    period: "May 2019 - Aug. 2019",
                     location: "Alexandria, VA",
                     points: [
-                      "Engineered backend infrastructure using Django API and Python to streamline database interactions",
-                      "Designed client-facing views using HTML and CSS, integrating SQLite for weather models and flight data storage"
+                      "Saved 300+ engineering hrs/yr by building a Python/Django backend to automate manual data collection",
+                      "Improved data access efficiency by 35% through developing a JavaScript/SQLite web interface"
                     ]
                   }
                 ].map((job, index) => (
@@ -438,32 +422,28 @@ const Index = () => {
               >
                 {[
                   {
-                    title: "Speed Prediction with Linear Regression",
-                    description: "Machine learning model for speed prediction",
-                    details: "Developed a Linear Regression model to predict speed from distance and time inputs. Generated custom dataset, trained model, and validated predictions with true values.",
-                    tech: ["Python", "scikit-learn", "NumPy", "joblib"],
-                    color: "blue"
+                    title: "SuperStar Social",
+                    description: "Product Designer",
+                    details: "Designed 100+ UI screens, accelerating prototype delivery by 30%. Led 5 full design iterations, reducing feedback turnaround time by 40%.",
+                    tech: ["UI/UX Design", "Prototyping", "User Research", "Figma"],
+                    color: "blue",
+                    period: "Dec. 2019 - Sept. 2020"
                   },
                   {
-                    title: "Spam Email Detection",
-                    description: "Text classification using NLP techniques",
-                    details: "Built supervised ML pipeline to classify emails using Naive Bayes, Logistic Regression, and SVM with TF-IDF vectorization. Preprocessed texts and compared performance metrics.",
-                    tech: ["Python", "scikit-learn", "NLTK", "TF-IDF", "SVM"],
-                    color: "green"
+                    title: "Bangladrop E-commerce",
+                    description: "Freelance UX Designer",
+                    details: "Improved design clarity by 60% over prior wireframes by designing 25-page ecommerce prototype.",
+                    tech: ["UX Design", "Wireframing", "E-commerce", "Prototyping"],
+                    color: "green",
+                    period: "June 2022 - Aug. 2022"
                   },
                   {
-                    title: "Cat vs. Dog Image Classifier",
-                    description: "Deep learning CNN for image classification",
-                    details: "Implemented CNN using TensorFlow and Keras for cat/dog classification. Used Kaggle dataset, performed image preprocessing and augmentation, trained from scratch.",
-                    tech: ["TensorFlow", "Keras", "CNN", "Python", "Kaggle"],
-                    color: "purple"
-                  },
-                  {
-                    title: "Turn-Based Grid Game",
-                    description: "Terminal-based multiplayer board game",
-                    details: "Created Snakes & Ladders-inspired multiplayer game with custom grid system. Players roll dice, move on zigzag grid, and can eliminate other players.",
-                    tech: ["Python", "OOP", "Game Logic", "Console Application"],
-                    color: "orange"
+                    title: "NECX Policing App",
+                    description: "Freelance UX Designer",
+                    details: "Helped secure a $100K investment and land first client with 50% higher pitch success by designing a policing mobile app.",
+                    tech: ["Mobile Design", "UX/UI", "Investment Pitch", "App Design"],
+                    color: "purple",
+                    period: "Jan 2021 - Feb. 2021"
                   }
                 ].map((project, index) => (
                   <Card key={index} className="group bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl">
@@ -505,34 +485,25 @@ const Index = () => {
                 {[
                   {
                     title: "Veera",
-                    role: "Co-Founder",
-                    period: "12/24 - Present",
-                    description: "First fitness apparel brand in the US to blend South Asian culture and mythology",
+                    role: "Venture Co-Founder and Product Lead",
+                    period: "Dec. 2024 - Present",
+                    description: "Culturally inspired activewear brand solving representation gaps in fitness apparel",
                     badge: "Active",
                     badgeColor: "bg-green-500/20 text-green-300",
                     points: [
-                      "Established global supply chain, managing manufacturing, logistics, and streamlined transactions",
-                      "Directed marketing strategy, customer research, and continuous brand refinement to drive adoption and growth"
+                      "Founded a culturally inspired activewear brand to solve representation gaps in fitness apparel",
+                      "Led product research, manufacturer sourcing, design execution, and customer acquisition strategy",
+                      "Applied lean product principles to physical goods development, managing branding, UX testing, and go-to-market"
                     ]
                   },
                   {
                     title: "Alphawave Technologies",
-                    role: "Founder",
-                    period: "11/20 - 05/23",
-                    description: "E-ink footwear with BT-enabled app for dynamic & customizable designs",
+                    role: "Venture Founder and Product Manager",
+                    period: "Nov. 2020 - May 2023",
+                    description: "Wearable technology for enhanced visibility, comfort, and durability",
                     points: [
-                      "Developed two functional 6-color e-ink footwear prototypes, driving early product innovation",
-                      "Oversaw web and mobile app development, producing three iterative releases through 100+ user feedback sessions"
-                    ]
-                  },
-                  {
-                    title: "SuperStar Social App",
-                    role: "Project Lead",
-                    period: "12/19 - 09/20",
-                    description: "Social app to craft & share episodic short films with advanced editing tools",
-                    points: [
-                      "Designed 100+ UI screens for social platform enabling episodic short film creation",
-                      "Coordinated cross-functional collaboration for cohesive, user-friendly experience"
+                      "Improved visibility 40%, comfort 30%, and durability 35% through cross-functional collaborative efforts between designers, technology advocates, and business strategists in the creation of 6 wearable prototypes and MVP",
+                      "Increased tester satisfaction by 40% between alpha and beta test cases by leading 100+ customer feedback sessions across 3 app iterations and prioritized features to accelerate delivery"
                     ]
                   }
                 ].map((startup, index) => (
@@ -578,26 +549,23 @@ const Index = () => {
                 {[
                   {
                     title: "Hoop Foundation",
-                    role: "Founder",
-                    description: "Providing food and education to underserved children in India through fundraising and strategic vision",
+                    role: "Program Manager",
+                    description: "Impacted 200+ kids through meals, clothing, and school supplies by launching a nonprofit initiative supporting underserved children in India. Coordinating events with Jill's House for disabled children, developing programs with foster care organizations, raising funds for Title I CEP schools, recruiting volunteers, and preparing for 501(c)(3) nonprofit registration.",
+                    period: "Oct. 2024 - Present",
                     color: "blue"
                   },
                   {
-                    title: "SkyAdventures",
-                    role: "Founder",
-                    description: "Launched wellness initiative under Art of Living to promote meditation through immersive experiences",
-                    color: "green"
-                  },
-                  {
-                    title: "HackOverflow, GMU",
-                    role: "Founder",
-                    description: "Directed board of 19 to host GMU's first collegiate hardware hackathon, raised $35k+ in sponsorship",
+                    title: "HackOverflow",
+                    role: "Founder and Program Manager",
+                    description: "Established the first self-sustainable hardware hackathon at George Mason University with 50+ participants; advised second year, growing attendance by 100+ more.",
+                    period: "May 2021 - Dec. 2024",
                     color: "purple"
                   },
                   {
-                    title: "Inventors and Innovations Team, GMU",
-                    role: "Founder",
-                    description: "Founded and led hands-on engineering society for innovations at George Mason University",
+                    title: "Inventors & Innovations Team",
+                    role: "Co-Founder and Co-President",
+                    description: "Completed 5+ projects and featured in 2 showcases after founding and leading a hands-on engineering organization; led as Co-President first 2 years and advised third year.",
+                    period: "Aug. 2019 - Apr. 2023",
                     color: "orange"
                   }
                 ].map((leadership, index) => (
